@@ -21,9 +21,10 @@ def getProblemsOfRating(start: int = 800, stop: int = -1):
     if stop == -1:
         stop = start + 400
     listOfProblems = []
-    url = apiUrl + '/problemset.problems'
-    problems = requests.get(url)
-    problems = json.loads(problems.text)
+    problemSet=''
+    with open('problemset.json', 'r', encoding='utf-8') as file:
+        problemSet=file.read()
+    problems = json.loads(problemSet)
     problems = problems['result']['problems']
     for problem in problems:
         if 'rating' not in problem:
